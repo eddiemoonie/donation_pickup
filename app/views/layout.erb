@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Donation-Pickup</title>
+  </head>
+  <body>
+
+    <div class="container">
+      <h1>Donation Pickup</h1>
+      <nav>
+        <!-- <% if logged_in? %>
+          <button type="submit" name="submit"><a href="/logout">Log Out</a></button>
+        <% else %> -->
+          <button type="submit" name="submit"><a href="/login">Log In</a></button>
+          <button type="submit" name="submit"><a href="/signup">Sign Up</a></button>
+        <!-- <% end %> -->
+      </nav>
+    </div>
+
+    <%= yield %>
+
+  </body>
+</html>

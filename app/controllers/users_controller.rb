@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   get '/users/:id' do
     if !logged_in?
-      erb :'users/login'
+      redirect to '/login'
     end
 
     @user = User.find(params[:id])
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     if !session[:user_id]
       erb :'users/new'
     else
-      redirect to "/users/#{@user.id}"
+      redirect to "/users/#{session[:user_id]}"
     end
   end
 
@@ -33,17 +33,17 @@ class UsersController < ApplicationController
 
   get '/login' do
     if !session[:user_id]
-      erb :'/users/login'
+      erb :'users/login'
     else
-      redirect to "/users/#{@user.id}"
+      redirect to "/users/#{session[:user_id]}"
     end
   end
 
   post '/login' do
-    user = User.find_by(:username => params[:username])
+    user = User.find_by(:username  => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect to "/users/#{@user.id}"
+      redirect to "/users/#{user.id}"
     else
       redirect to '/login'
     end
@@ -56,6 +56,6 @@ class UsersController < ApplicationController
     else
       redirect to '/'
     end
-  end 
+  end
 
 end

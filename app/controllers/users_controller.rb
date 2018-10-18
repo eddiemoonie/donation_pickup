@@ -1,23 +1,33 @@
 class UsersController < ApplicationController
 
-  get '/users/:id' do
-    if !logged_in?
-      redirect to '/login'
-    end
+  # get '/users/:id' do
+  #   if !logged_in?
+  #     redirect to '/login'
+  #   end
+  #
+  #   @user = User.find(params[:id])
+  #   if !@user.nil? && @user == current_user
+  #     erb :'users/show'
+  #   else
+  #     redirect to '/login'
+  #   end
+  # end
 
-    @user = User.find(params[:id])
+  get '/users/:slug' do
+    redirect_if_not_logged_in
+    @user = User.find_by_slug(params[:slug])
     if !@user.nil? && @user == current_user
       erb :'users/show'
     else
-      redirect to '/login'
+      redirect to "/users/#{current_user.slug}"
     end
   end
 
   get '/signup' do
-    if !session[:user_id]
+    if !logged_in?
       erb :'users/new'
     else
-      redirect to "/users/#{session[:user_id]}"
+      redirect to "/users/#{current_user.slug}"
     end
   end
 
@@ -27,7 +37,7 @@ class UsersController < ApplicationController
     else
       @user = User.create(:username => params[:username], :password => params[:password])
       session[:user_id] = @user.id
-      redirect to "/users/#{session[:user_id]}"
+      redirect to "/users/#{current_user.slug}"
     end
   end
 
@@ -35,7 +45,7 @@ class UsersController < ApplicationController
     if !session[:user_id]
       erb :'users/login'
     else
-      redirect to "/users/#{session[:user_id]}"
+      redirect to "/users/#{current_user.slug}"
     end
   end
 
@@ -43,14 +53,14 @@ class UsersController < ApplicationController
     user = User.find_by(:username  => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect to "/users/#{user.id}"
+      redirect to "/users/#{current_user.slug}"
     else
       redirect to '/login'
     end
   end
 
   get '/logout' do
-    if session[:user_id] != nil
+    if logged_in?
       session.destroy
       redirect to '/login'
     else

@@ -1,0 +1,41 @@
+<h1><%= @restaurant.name %></h1>
+
+<table>
+  <thead>
+
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><strong>Name</strong></td>
+      <td><strong>Review</strong></td>
+      <td><strong>Rating</strong></td>
+    </tr>
+
+    <% @restaurant.reviews.each do |review| %>
+      <tr>
+        <td><%= review.user.username %></td>
+        <td><%= review.content %></td>
+        <td><%= review.rating %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if !current_user.admin %>
+  <form action="/restaurants/<%=@restaurant.slug%>" method="post">
+    <strong>Rating</strong>
+    <input type='radio' name='rating' value='1'>1
+    <input type='radio' name='rating' value='2'>2
+    <input type='radio' name='rating' value='3'>3
+    <input type='radio' name='rating' value='4'>4
+    <input type='radio' name='rating' value='5'>5
+    <br>
+    <strong>Review</strong>
+    <input type="text" name="content" value="Write review here...">
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+<% end %>

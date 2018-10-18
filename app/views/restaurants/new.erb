@@ -1,0 +1,34 @@
+<h2>New</h2>
+
+<% if current_user.admin %>
+  <form action="/restaurants" method="post">
+    <div>
+      <strong>Name: </strong>
+      <input type="text" name="name">
+    </div>
+
+    <div>
+      <strong>Street Address: </strong>
+      <input type="text" name="street">
+    </div>
+
+    <div>
+      <strong>City: </strong>
+      <input type="text" name="city">
+    </div>
+
+    <div>
+      <strong>State: </strong>
+      <input type="text" name="state">
+    </div>
+
+    <div>
+      <strong>Zip Code: </strong>
+      <input type="text" name="zipcode">
+    </div>
+
+    <div>
+      <input type="submit" value="Post New Business">
+    </div>
+  </form>
+<% end %>

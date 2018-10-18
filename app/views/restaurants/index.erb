@@ -1,0 +1,9 @@
+<h2>Index</h2>
+
+<% @restaurants.each do |restaurant| %>
+  <p><%= restaurant.name %></p>
+  <p>
+    <%= restaurant.street %>
+    <%= restaurant.city %>, <%= restaurant.state %> <%= restaurant.zipcode %>
+  </p>
+<% end %>

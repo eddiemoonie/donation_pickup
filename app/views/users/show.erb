@@ -1,8 +1,29 @@
 <h2>Welcome, <%= @user.username %>! <% if @user.admin %> | Business Owner | <% end %></h2>
 
-<div>
-  <a href="/restaurants">View Restaurants</a>
-  <% if current_user.admin %>
-   <a href="/restaurants/new">Post New Restaurant</a>
-  <% end %>
-</div>
+
+<% if current_user.admin %>
+  <table>
+    <thead>
+
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><strong>Name</strong></td>
+        <td><strong>Address</strong></td>
+        <td><strong>Rating</strong></td>
+      </tr>
+
+      <% current_user.restaurants.each do |restaurant| %>
+        <tr>
+          <td><%= restaurant.name %></td>
+          <td>
+            <%= restaurant.street %>
+            <%= restaurant.city %>, <%= restaurant.state %> <%= restaurant.zipcode %>
+          </td>
+          <td>N/A</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

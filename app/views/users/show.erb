@@ -16,7 +16,7 @@
       <% @owned_restaurants.each do |r| %>
         <% if r.user_id == current_user.id %>
           <tr>
-            <td><%= r.name %></td>
+            <td><a href="/restaurants/<%=r.slug%>"><%= r.name %></a></td>
             <td>
               <%= r.street %> <%= r.city %>, <%= r.state %>  <%= r.zipcode %>
             </td>

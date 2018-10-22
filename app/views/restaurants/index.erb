@@ -14,7 +14,7 @@
 
     <% @restaurants.each do |restaurant| %>
       <tr>
-        <td><%= restaurant.name %></td>
+        <td><a href="/restaurants/<%=restaurant.slug%>"><%= restaurant.name %></a></td>
         <td>
           <%= restaurant.street %>
           <%= restaurant.city %>, <%= restaurant.state %> <%= restaurant.zipcode %>

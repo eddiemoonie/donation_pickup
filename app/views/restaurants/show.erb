@@ -1,6 +1,12 @@
 <h1><%= @restaurant.name %></h1>
-<p><%= @restaurant.user_id %></p>
+<% if @restaurant.user_id == current_user.id %>
+  <form action="/restaurants/<%=@restaurant.slug%>/delete" method="post">
+    <input type="hidden" name="_method" value="Delete">
+    <input type="submit" value="Delete Business">
+  </form>
+<% end %>
 
+<br>
 
 <table>
   <thead>

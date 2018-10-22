@@ -20,7 +20,7 @@
           <%= restaurant.street %>
           <%= restaurant.city %>, <%= restaurant.state %> <%= restaurant.zipcode %>
         </td>
-        <td>N/A</td>
+        <td>NA</td>
         <td>
           <% if restaurant.user_id == current_user.id %>
             <form action="/restaurants/<%=restaurant.slug%>/delete" method="post">

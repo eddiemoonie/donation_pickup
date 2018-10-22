@@ -45,4 +45,15 @@ class RestaurantsController < ApplicationController
       redirect to "/restaurants/#{@restaurant.slug}"
     end
   end
+
+  delete '/restaurants/:slug/delete' do
+    redirect_if_not_logged_in
+    if current_user.admin?
+      @restaurant = Restaurant.find_by_slug(params[:slug])
+      if @restaurant
+        @restaurant.delete
+      end
+    end
+    redirect to "/users/#{current_user.slug}"
+  end
 end

@@ -11,16 +11,26 @@
         <td><strong>Name</strong></td>
         <td><strong>Address</strong></td>
         <td><strong>Rating</strong></td>
+        <td></td>
       </tr>
 
-      <% @owned_restaurants.each do |r| %>
-        <% if r.user_id == current_user.id %>
+      <% @owned_restaurants.each do |restaurant| %>
+        <% if restaurant.user_id == current_user.id %>
           <tr>
-            <td><a href="/restaurants/<%=r.slug%>"><%= r.name %></a></td>
+            <td><a href="/restaurants/<%=restaurant.slug%>"><%= restaurant.name %></a></td>
             <td>
-              <%= r.street %> <%= r.city %>, <%= r.state %>  <%= r.zipcode %>
+              <%= restaurant.street %>
+              <%= restaurant.city %>, <%= restaurant.state %>  <%= restaurant.zipcode %>
             </td>
             <td> N/A </td>
+            <td>
+              <% if restaurant.user_id == current_user.id %>
+                <form action="/restaurants/<%=restaurant.slug%>/delete" method="post">
+                  <input type="hidden" name="_method" value="Delete">
+                  <input type="submit" value="Delete Business">
+                </form>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       <% end %>

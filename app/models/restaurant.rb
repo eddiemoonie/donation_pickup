@@ -10,4 +10,11 @@ class Restaurant < ActiveRecord::Base
   def self.find_by_slug(slug)
     self.all.find{|instance| instance.slug == slug}
   end
+
+  def average_rating
+    if self.reviews.exists?
+      (self.reviews.inject(0){|sum, review| sum + review[:rating]})/(self.reviews.size).round(1)
+    end
+  end
+
 end

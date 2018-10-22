@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   get '/users/:slug' do
     redirect_if_not_logged_in
     @user = User.find_by_slug(params[:slug])
+    @owned_restaurants = Restaurant.all
     if !@user.nil? && @user == current_user
       erb :'users/show'
     else
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
     if params[:username] == "" || params[:password] == ""
       redirect '/signup'
     else
-      @user = User.create(:username => params[:username], :password => params[:password])
+      @user = User.create(:username => params[:username], :password => params[:password], :admin => params[:admin])
       session[:user_id] = @user.id
       redirect to "/users/#{current_user.slug}"
     end

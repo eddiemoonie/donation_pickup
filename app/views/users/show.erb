@@ -1,6 +1,5 @@
 <h2>Welcome, <%= @user.username %>! <% if @user.admin %> | Business Owner | <% end %></h2>
 
-
 <% if current_user.admin %>
   <table>
     <thead>
@@ -14,15 +13,16 @@
         <td><strong>Rating</strong></td>
       </tr>
 
-      <% current_user.restaurants.each do |restaurant| %>
-        <tr>
-          <td><%= restaurant.name %></td>
-          <td>
-            <%= restaurant.street %>
-            <%= restaurant.city %>, <%= restaurant.state %> <%= restaurant.zipcode %>
-          </td>
-          <td>N/A</td>
-        </tr>
+      <% @owned_restaurants.each do |r| %>
+        <% if r.user_id == current_user.id %>
+          <tr>
+            <td><%= r.name %></td>
+            <td>
+              <%= r.street %> <%= r.city %>, <%= r.state %>  <%= r.zipcode %>
+            </td>
+            <td> N/A </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

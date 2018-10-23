@@ -1,4 +1,4 @@
-<h1><%= @restaurant.name %> <%= (@restaurant.average_rating) %></h1>
+<h1><%= @restaurant.name %> <%= @restaurant.average_rating %></h1>
 <% if @restaurant.user_id == current_user.id %>
   <form action="/restaurants/<%=@restaurant.slug%>/delete" method="post">
     <input type="hidden" name="_method" value="Delete">
@@ -6,29 +6,31 @@
   </form>
 <% end %>
 
-<br>
+<% if @restaurant.reviews.exists? %>
+  <table>
+    <thead>
 
-<table>
-  <thead>
+    </thead>
 
-  </thead>
-
-  <tbody>
-    <tr>
-      <td><strong>Name</strong></td>
-      <td><strong>Review</strong></td>
-      <td><strong>Rating</strong></td>
-    </tr>
-
-    <% @restaurant.reviews.each do |review| %>
+    <tbody>
       <tr>
-        <td><%= review.user.username %></td>
-        <td><%= review.content %></td>
-        <td><%= review.rating %></td>
+        <td><strong>Name</strong></td>
+        <td><strong>Review</strong></td>
+        <td><strong>Rating</strong></td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+
+      <% @restaurant.reviews.each do |review| %>
+        <tr>
+          <td><%= review.user.username %></td>
+          <td><%= review.content %></td>
+          <td><%= review.rating %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Write a review...</p>
+<% end %>
 
 <br>
 

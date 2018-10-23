@@ -1,4 +1,4 @@
-<h1><%= @restaurant.name %> (<%= @restaurant.average_rating %>)</h1>
+<h1><%= @restaurant.name %> <%= (@restaurant.average_rating) %></h1>
 <% if @restaurant.user_id == current_user.id %>
   <form action="/restaurants/<%=@restaurant.slug%>/delete" method="post">
     <input type="hidden" name="_method" value="Delete">

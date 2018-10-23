@@ -1,4 +1,36 @@
-<h2>Welcome, <%= @user.username %>! <% if @user.admin %> | Business Owner | <% end %></h2>
+<% if @user.admin %>
+  <h2>Welcome, <%= @user.username %> | Business Owner |</h2>
+  <h3>My Businesses</h3>
+<% else %>
+  <h2>Welcome, <%= @user.username %></h2>
+  <h3>My Reviews</h3>
+<% end %>
+
+<% if !current_user.admin && current_user.reviews.exists? %>
+  <table>
+    <thead>
+
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><strong>Name</strong></td>
+        <td><strong>Review</strong></td>
+        <td><strong>Rating</strong></td>
+      </tr>
+
+      <% @user.reviews.each do |review| %>
+        <tr>
+          <td><%= review.restaurant.name %></td>
+          <td><%= review.content %></td>
+          <td><%= review.rating %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Please view restaurants to review...</p>
+<% end %>
 
 <% if current_user.admin %>
   <table>

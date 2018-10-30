@@ -1,11 +1,19 @@
-<h1><%= @restaurant.name %> <%= @restaurant.average_rating %></h1>
+<!-- RESTAURANT NAME AND RATING -->
+<h1><%= @restaurant.name %> - <%= @restaurant.average_rating %></h1>
+<h4><%= @restaurant.street %> <%= @restaurant.city %>, <%= @restaurant.state %> <%= @restaurant.zipcode %></h4>
+
 <% if @restaurant.user_id == current_user.id %>
   <form action="/restaurants/<%=@restaurant.slug%>/delete" method="post">
+    <button type="button" name="edit"><a href="/restaurants/<%=@restaurant.slug%>/edit">Edit</a></button>
+
     <input type="hidden" name="_method" value="Delete">
-    <input type="submit" value="Delete Business">
+    <input type="submit" value="Delete">
   </form>
 <% end %>
 
+<br>
+
+<!-- RESTAURANT REVIEWS -->
 <% if @restaurant.reviews.exists? %>
   <table>
     <thead>
@@ -28,12 +36,13 @@
       <% end %>
     </tbody>
   </table>
-<% else %>
+<% elsif !current_user.admin %>
   <p>Write a review...</p>
 <% end %>
 
 <br>
 
+<!-- RATE THE RESTAURANT -->
 <% if !current_user.admin %>
   <form action="/restaurants/<%=@restaurant.slug%>" method="post">
     <strong>Rating</strong>

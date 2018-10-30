@@ -1,0 +1,35 @@
+<h2>Edit</h2>
+
+<% if current_user.admin %>
+  <form action="/restaurants/<%=@restaurant.slug%>" method="post">
+    <input type="hidden" name="_method" value="PATCH">
+    <div>
+      <strong>Name: </strong>
+      <input type="text" name="name" value="<%=@restaurant.name%>">
+    </div>
+
+    <div>
+      <strong>Street Address: </strong>
+      <input type="text" name="street" value="<%=@restaurant.street%>">
+    </div>
+
+    <div>
+      <strong>City: </strong>
+      <input type="text" name="city" value="<%=@restaurant.city%>">
+    </div>
+
+    <div>
+      <strong>State: </strong>
+      <input type="text" name="state" value="<%=@restaurant.state%>">
+    </div>
+
+    <div>
+      <strong>Zip Code: </strong>
+      <input type="text" name="zipcode" value="<%=@restaurant.zipcode%>">
+    </div>
+
+    <div>
+      <input type="submit" value="Edit <%=@restaurant.name%>">
+    </div>
+  </form>
+<% end %>

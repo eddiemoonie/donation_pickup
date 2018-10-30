@@ -46,6 +46,29 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  get '/restaurants/:slug/edit' do
+    redirect_if_not_logged_in
+    if current_user.admin?
+      @restaurant = Restaurant.find_by_slug(params[:slug])
+      erb :'/restaurants/edit'
+    end
+  end
+
+  patch '/restaurants/:slug' do
+    redirect_if_not_logged_in
+    @restaurant = Restaurant.find_by_slug(params[:slug])
+    if @restaurant && current_user.admin?
+      @restaurant.update(
+        :name => params[:name],
+        :street => params[:street],
+        :city => params[:city],
+        :state => params[:state],
+        :zipcode => params[:zipcode]
+      )
+      redirect to "/restaurants/#{@restaurant.slug}"
+    end
+  end
+
   delete '/restaurants/:slug/delete' do
     redirect_if_not_logged_in
     if current_user.admin?

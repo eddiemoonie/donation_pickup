@@ -9,7 +9,7 @@
       <h1>Felp!</h1>
       <nav>
         <% if logged_in? %>
-          <button type="button" name="button"><a href="/users/:slug">Profile</a></button>
+          <button type="submit" name="submit"><a href="/users/:slug">Profile</a></button>
           <button type="submit" name="submit"><a href="/restaurants">Restaurants</a></button>
           <% if current_user.admin %>
             <button type="submit" name="submit"><a href="/restaurants/new">Post New Restaurant</a></button>

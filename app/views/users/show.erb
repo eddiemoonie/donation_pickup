@@ -1,11 +1,13 @@
-<% if @user.admin %>
-  <h2>Welcome, <%= @user.username %> | Business Owner |</h2>
-  <h3>My Businesses</h3>
+<!-- GREET ADMIN/USER -->
+<% if current_user.admin %>
+  <h2>Welcome, <%= current_user.username %>! | Business Owner |</h2>
+  <h3>My Business(es)</h3>
 <% else %>
-  <h2>Welcome, <%= @user.username %></h2>
-  <h3>My Reviews</h3>
+  <h2>Welcome, <%= current_user.username %>!</h2>
+  <h3>My Review(s)</h3>
 <% end %>
 
+<!-- SHOW USER REVIEWS -->
 <% if !current_user.admin && current_user.reviews.exists? %>
   <table>
     <thead>
@@ -28,10 +30,11 @@
       <% end %>
     </tbody>
   </table>
-<% else %>
+<% elsif !current_user.admin && !current_user.reviews.exists? %>
   <p>Please view restaurants to review...</p>
 <% end %>
 
+<!-- SHOW ADMIN'S RESTAURANTS -->
 <% if current_user.admin %>
   <table>
     <thead>
@@ -50,18 +53,13 @@
         <% if restaurant.user_id == current_user.id %>
           <tr>
             <td><a href="/restaurants/<%=restaurant.slug%>"><%= restaurant.name %></a></td>
+            <td><%= restaurant.street %> <%= restaurant.city %>, <%= restaurant.state %>  <%= restaurant.zipcode %></td>
+            <td></td>
             <td>
-              <%= restaurant.street %>
-              <%= restaurant.city %>, <%= restaurant.state %>  <%= restaurant.zipcode %>
-            </td>
-            <td> N/A </td>
-            <td>
-              <% if restaurant.user_id == current_user.id %>
-                <form action="/restaurants/<%=restaurant.slug%>/delete" method="post">
-                  <input type="hidden" name="_method" value="Delete">
-                  <input type="submit" value="Delete Business">
-                </form>
-              <% end %>
+              <form action="/restaurants/<%=restaurant.slug%>/delete" method="post">
+                <input type="hidden" name="_method" value="Delete">
+                <input type="submit" value="Delete Business">
+              </form>
             </td>
           </tr>
         <% end %>

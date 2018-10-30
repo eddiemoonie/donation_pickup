@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
     self.all.find{|instance| instance.slug == slug}
   end
 
+  def restaurants_owned?
+    self.restaurants.exists?
+  end
+
 end

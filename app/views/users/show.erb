@@ -23,7 +23,7 @@
 
       <% @user.reviews.each do |review| %>
         <tr>
-          <td><%= review.restaurant.name %></td>
+          <td><a href="/restaurants/<%=review.restaurant.slug%>"><%= review.restaurant.name %></a></td>
           <td><%= review.content %></td>
           <td><%= review.rating %></td>
         </tr>

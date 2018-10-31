@@ -26,6 +26,7 @@
           <td><a href="/restaurants/<%=review.restaurant.slug%>"><%= review.restaurant.name %></a></td>
           <td><%= review.content %></td>
           <td><%= review.rating %></td>
+          <td><button type="button" name="view"><a href="/restaurants/<%=review.restaurant.slug%>/reviews/<%=review.id%>">View</a></button></td>
         </tr>
       <% end %>
     </tbody>

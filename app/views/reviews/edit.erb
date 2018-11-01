@@ -1,0 +1,16 @@
+<% if !current_user.admin %>
+  <form action="/restaurants/<%=@restaurant.slug%>/reviews/<%=@review.id%>" method="post">
+    <input type="hidden" name="_method" value="PATCH">
+    <strong>Rating</strong>
+    <input type='radio' name='rating' value='1'>1
+    <input type='radio' name='rating' value='2'>2
+    <input type='radio' name='rating' value='3'>3
+    <input type='radio' name='rating' value='4'>4
+    <input type='radio' name='rating' value='5'>5
+    <br>
+    <strong>Review</strong>
+    <input type="text" name="content" value="<%=@review.content%>">
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+<% end %>

@@ -11,6 +11,7 @@
         <td><%=@review.user.username%></td>
         <td><%=@review.content%></td>
         <td><%=@review.rating%></td>
+        <td><button type="button" name="edit"><a href="/restaurants/<%=@restaurant.slug%>/reviews/<%=@review.id%>/edit">Edit</a></button></td>
       </tr>
     </tbody>
   </thead>

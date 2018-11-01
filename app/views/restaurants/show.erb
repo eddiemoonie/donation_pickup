@@ -1,5 +1,10 @@
 <!-- RESTAURANT NAME AND RATING -->
-<h1><%= @restaurant.name %> - <%= @restaurant.average_rating.round(2) %></h1>
+<% if @restaurant.reviews.exists? %>
+  <h1><%= @restaurant.name %> - <%= @restaurant.average_rating.round(2) %></h1>
+<% else %>
+  <h1><%= @restaurant.name %></h1>
+<% end %>
+
 <h4><%= @restaurant.street %> <%= @restaurant.city %>, <%= @restaurant.state %> <%= @restaurant.zipcode %></h4>
 
 <% if @restaurant.user_id == current_user.id %>

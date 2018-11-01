@@ -18,14 +18,6 @@
         <td><a href="/restaurants/<%=restaurant.slug%>"><%= restaurant.name %></a></td>
         <td><%= restaurant.street %> <%= restaurant.city %>, <%= restaurant.state %> <%= restaurant.zipcode %></td>
         <td><%= restaurant.average_rating %></td>
-        <td>
-          <% if restaurant.user_id == current_user.id %>
-            <form action="/restaurants/<%=restaurant.slug%>/delete" method="post">
-              <input type="hidden" name="_method" value="Delete">
-              <input type="submit" value="Delete Business">
-            </form>
-          <% end %>
-        </td>
       </tr>
     <% end %>
   </tbody>

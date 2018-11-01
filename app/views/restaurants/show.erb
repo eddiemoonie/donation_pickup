@@ -30,7 +30,11 @@
           <td><%= review.user.username %></td>
           <td><%= review.content %></td>
           <td><%= review.rating %></td>
-          <td><button type="button" name="view"><a href="/restaurants/<%=@restaurant.slug%>/reviews/<%=review.id%>">View</a></button></td>
+          <td>
+            <% if review.user_id == current_user.id %>
+              <button type="button" name="view"><a href="/restaurants/<%=@restaurant.slug%>/reviews/<%=review.id%>">View</a></button>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

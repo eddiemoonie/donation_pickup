@@ -55,7 +55,7 @@
           <tr>
             <td><a href="/restaurants/<%=restaurant.slug%>"><%= restaurant.name %></a></td>
             <td><%= restaurant.street %> <%= restaurant.city %>, <%= restaurant.state %>  <%= restaurant.zipcode %></td>
-            <td></td>
+            <td><%= restaurant.average_rating %></td>
             <td>
               <form action="/restaurants/<%=restaurant.slug%>/delete" method="post">
                 <input type="hidden" name="_method" value="Delete">

@@ -27,4 +27,16 @@ class ReviewsController < ApplicationController
     end
   end
 
+  delete '/restaurants/:slug/reviews/:id/delete' do
+    redirect_if_not_logged_in
+    if !current_user.admin?
+      @restaurant = Restaurant.find_by_slug(params[:slug])
+      @review = Review.find(params[:id])
+      if @restaurant && @review
+        @review.delete
+      end
+      redirect to "/restaurants/#{current_user.slug}"
+    end
+  end
+
 end

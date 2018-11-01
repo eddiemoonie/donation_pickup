@@ -17,7 +17,12 @@
       <tr>
         <td><a href="/restaurants/<%=restaurant.slug%>"><%= restaurant.name %></a></td>
         <td><%= restaurant.street %> <%= restaurant.city %>, <%= restaurant.state %> <%= restaurant.zipcode %></td>
-        <td><%= restaurant.average_rating %></td>
+        <% if restaurant.reviews.exists? %>
+          <td><%= restaurant.average_rating.round(2) %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+
       </tr>
     <% end %>
   </tbody>

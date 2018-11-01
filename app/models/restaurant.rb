@@ -13,7 +13,7 @@ class Restaurant < ActiveRecord::Base
 
   def average_rating
     if self.reviews.exists?
-      (self.reviews.inject(0){|sum, review| sum + review[:rating]})/(self.reviews.size).round(1)
+      self.reviews.inject(0){|sum, review| sum + review[:rating]}/self.reviews.size.round(2)
     end
   end
 

@@ -1,5 +1,5 @@
 <!-- RESTAURANT NAME AND RATING -->
-<h1><%= @restaurant.name %> - <%= @restaurant.average_rating %></h1>
+<h1><%= @restaurant.name %> - <%= @restaurant.average_rating.round(2) %></h1>
 <h4><%= @restaurant.street %> <%= @restaurant.city %>, <%= @restaurant.state %> <%= @restaurant.zipcode %></h4>
 
 <% if @restaurant.user_id == current_user.id %>

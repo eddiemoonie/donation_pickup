@@ -51,7 +51,7 @@
 <br>
 
 <!-- RATE THE RESTAURANT -->
-<% if !@restaurant.reviews.exists? %>
+<% if !@restaurant.reviews.include?(@review) %>
   <form action="/restaurants/<%=@restaurant.slug%>" method="post">
     <strong>Rating</strong>
     <input type='radio' name='rating' value='1'>1
@@ -65,22 +65,4 @@
     <br>
     <input type="submit" value="Submit">
   </form>
-<% else %>
-  <% @restaurant.reviews.each do |review| %>
-    <% if review.user.id != current_user.id %>
-      <form action="/restaurants/<%=@restaurant.slug%>" method="post">
-        <strong>Rating</strong>
-        <input type='radio' name='rating' value='1'>1
-        <input type='radio' name='rating' value='2'>2
-        <input type='radio' name='rating' value='3'>3
-        <input type='radio' name='rating' value='4'>4
-        <input type='radio' name='rating' value='5'>5
-        <br>
-        <strong>Review</strong>
-        <input type="text" name="content" value="Write review here...">
-        <br>
-        <input type="submit" value="Submit">
-      </form>
-    <% end %>
-  <% end %>
 <% end %>

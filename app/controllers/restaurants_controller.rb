@@ -30,6 +30,7 @@ class RestaurantsController < ApplicationController
   get '/restaurants/:slug' do
     redirect_if_not_logged_in
     @restaurant = Restaurant.find_by_slug(params[:slug])
+    @review = @restaurant.reviews.find{|instance| instance.user.id == current_user.id}
     erb :'/restaurants/show'
   end
 

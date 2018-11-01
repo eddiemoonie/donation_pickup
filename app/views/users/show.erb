@@ -47,7 +47,6 @@
         <td><strong>Name</strong></td>
         <td><strong>Address</strong></td>
         <td><strong>Rating</strong></td>
-        <td></td>
       </tr>
 
       <% @owned_restaurants.each do |restaurant| %>
@@ -58,8 +57,10 @@
             <td><%= restaurant.average_rating %></td>
             <td>
               <form action="/restaurants/<%=restaurant.slug%>/delete" method="post">
+                <button type="button" name="edit"><a href="/restaurants/<%=restaurant.slug%>/edit">Edit</a></button>
+
                 <input type="hidden" name="_method" value="Delete">
-                <input type="submit" value="Delete Business">
+                <input type="submit" value="Delete">
               </form>
             </td>
           </tr>

@@ -21,11 +21,16 @@ class ReviewsController < ApplicationController
     @restaurant = Restaurant.find_by_slug(params[:slug])
     @review = Review.find(params[:id])
     if @restaurant && @review && !current_user.admin?
-      @review.update(
-        :content => params[:content],
-        :rating => params[:rating]
-      )
-      redirect to "/restaurants/#{@restaurant.slug}/reviews/#{@review.id}"
+      if params[:rating] == nil
+        flash[:message] = "Please rate the business!"
+        redirect to "/restaurants/#{@restaurant.slug}/reviews/#{@review.id}/edit"
+      else
+        @review.update(
+          :content => params[:content],
+          :rating => params[:rating]
+        )
+        redirect to "/restaurants/#{@restaurant.slug}/reviews/#{@review.id}"
+      end
     end
   end
 

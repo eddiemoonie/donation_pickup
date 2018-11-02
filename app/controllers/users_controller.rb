@@ -1,4 +1,6 @@
+require 'rack-flash'
 class UsersController < ApplicationController
+  use Rack::Flash
 
   get '/users/:slug' do
     redirect_if_not_logged_in

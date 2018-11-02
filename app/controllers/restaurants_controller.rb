@@ -1,4 +1,6 @@
+require 'rack-flash'
 class RestaurantsController < ApplicationController
+  use Rack::Flash
 
   get '/restaurants' do
     redirect_if_not_logged_in

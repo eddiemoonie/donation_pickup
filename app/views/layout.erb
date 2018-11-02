@@ -22,7 +22,14 @@
       </nav>
     </div>
 
-    <%= yield %>
+    <br>
+
+    <div>
+      <% if flash.has?(:message) %>
+        <strong><%= flash[:message] %></strong>
+      <% end %>
+      <%= yield %>
+    </div>
 
   </body>
 </html>

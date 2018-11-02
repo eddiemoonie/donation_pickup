@@ -1,4 +1,6 @@
+require 'rack-flash'
 class ReviewsController < ApplicationController
+  use Rack::Flash
 
   get '/restaurants/:slug/reviews/:id' do
     redirect_if_not_logged_in

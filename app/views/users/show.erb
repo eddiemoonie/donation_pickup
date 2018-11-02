@@ -49,15 +49,15 @@
         <td><strong>Rating</strong></td>
       </tr>
 
-      <% @owned_restaurants.each do |restaurant| %>
-        <% if restaurant.user_id == current_user.id %>
+      <% @restaurants.each do |owned_restaurant| %>
+        <% if owned_restaurant.user_id == current_user.id %>
           <tr>
-            <td><a href="/restaurants/<%=restaurant.slug%>"><%= restaurant.name %></a></td>
-            <td><%= restaurant.street %> <%= restaurant.city %>, <%= restaurant.state %>  <%= restaurant.zipcode %></td>
-            <td><%= restaurant.average_rating %></td>
+            <td><a href="/restaurants/<%=owned_restaurant.slug%>"><%= owned_restaurant.name %></a></td>
+            <td><%= owned_restaurant.street %> <%= owned_restaurant.city %>, <%= owned_restaurant.state %>  <%= owned_restaurant.zipcode %></td>
+            <td><%= owned_restaurant.average_rating %></td>
             <td>
-              <form action="/restaurants/<%=restaurant.slug%>/delete" method="post">
-                <button type="button" name="edit"><a href="/restaurants/<%=restaurant.slug%>/edit">Edit</a></button>
+              <form action="/restaurants/<%=owned_restaurant.slug%>/delete" method="post">
+                <button type="button" name="edit"><a href="/restaurants/<%=owned_restaurant.slug%>/edit">Edit</a></button>
 
                 <input type="hidden" name="_method" value="Delete">
                 <input type="submit" value="Delete">

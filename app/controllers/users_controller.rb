@@ -1,22 +1,9 @@
 class UsersController < ApplicationController
 
-  # get '/users/:id' do
-  #   if !logged_in?
-  #     redirect to '/login'
-  #   end
-  #
-  #   @user = User.find(params[:id])
-  #   if !@user.nil? && @user == current_user
-  #     erb :'users/show'
-  #   else
-  #     redirect to '/login'
-  #   end
-  # end
-
   get '/users/:slug' do
     redirect_if_not_logged_in
     @user = User.find_by_slug(params[:slug])
-    @owned_restaurants = Restaurant.all
+    @restaurants = Restaurant.all
     if !@user.nil? && @user == current_user
       erb :'users/show'
     else

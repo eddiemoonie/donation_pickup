@@ -1,3 +1,5 @@
+<h2>Your Review</h2>
+
 <table>
   <thead>
     <tbody>
@@ -15,7 +17,7 @@
           <% if @review.user_id == current_user.id %>
             <form action="/restaurants/<%=@restaurant.slug%>/reviews/<%=@review.id%>/delete" method="post">
               <button type="button" name="edit"><a href="/restaurants/<%=@restaurant.slug%>/reviews/<%=@review.id%>/edit">Edit</a></button>
-              
+
               <input type="hidden" name="_method" value="Delete">
               <input type="submit" value="Delete">
             </form>

@@ -1,3 +1,5 @@
+<h2>Edit Review</h2>
+
 <% if !current_user.admin %>
   <form action="/restaurants/<%=@restaurant.slug%>/reviews/<%=@review.id%>" method="post">
     <input type="hidden" name="_method" value="PATCH">

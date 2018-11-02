@@ -51,7 +51,7 @@
 <br>
 
 <!-- RATE THE RESTAURANT -->
-<% if !@restaurant.reviews.include?(@review) %>
+<% if !@restaurant.reviews.include?(@review) && !current_user.admin? %>
   <form action="/restaurants/<%=@restaurant.slug%>" method="post">
     <strong>Rating</strong>
     <input type='radio' name='rating' value='1'>1

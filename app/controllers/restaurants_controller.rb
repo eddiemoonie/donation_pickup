@@ -14,7 +14,8 @@ class RestaurantsController < ApplicationController
   end
 
   post '/restaurants' do
-    if params[:name] == ""
+    if params[:name] == "" || params[:street] == "" || params[:city] == "" || params[:state] == "" || params[:zipcode] == ""
+      flash[:message] = "Please fill in all entries!"
       redirect to '/restaurants/new'
     else
       @restaurant = Restaurant.create(
@@ -38,7 +39,10 @@ class RestaurantsController < ApplicationController
 
   post '/restaurants/:slug' do
     @restaurant = Restaurant.find_by_slug(params[:slug])
-    if params[:rating] != ""
+    if params[:rating] = ""
+      flash[:message] = "Please rate the business!"
+      redirect to "/restaurants/#{@restaurant.slug}"
+    else
       Review.create(
         :user_id => current_user.id,
         :restaurant_id => @restaurant.id,
@@ -61,14 +65,19 @@ class RestaurantsController < ApplicationController
     redirect_if_not_logged_in
     @restaurant = Restaurant.find_by_slug(params[:slug])
     if @restaurant && current_user.admin?
-      @restaurant.update(
-        :name => params[:name],
-        :street => params[:street],
-        :city => params[:city],
-        :state => params[:state],
-        :zipcode => params[:zipcode]
-      )
-      redirect to "/restaurants/#{@restaurant.slug}"
+      if params[:name] == "" || params[:street] == "" || params[:city] == "" || params[:state] == "" || params[:zipcode] == ""
+        flash[:message] = "Please fill in all the entries"
+        redirect to "/restaurants/#{@restaurant.slug}/edit"
+      else
+        @restaurant.update(
+          :name => params[:name],
+          :street => params[:street],
+          :city => params[:city],
+          :state => params[:state],
+          :zipcode => params[:zipcode]
+        )
+        redirect to "/restaurants/#{@restaurant.slug}"
+      end
     end
   end
 
